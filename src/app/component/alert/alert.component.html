@@ -1,0 +1,85 @@
+
+<div class="row">
+  <!-- ==================================-->
+  <!-- ======= Basic Nav ===== -->
+  <!-- ==================================-->
+  <div class="col-12">
+    <div class="card">
+      <div class="p-3">
+        <h4 class="card-title mb-0">Branche Nav</h4>
+      </div>
+      <div class="card-body border-top">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink>Ajout</a>
+            <ng-template ngbNavContent>
+              
+<div class="table">
+  <form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Nom de la branche</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="Nom de la branche"  [(ngModel)]="branche.brancheNom" [ngModelOptions]="{standalone:true}">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Branche Reference</label>
+      <input type="text" class="form-control" id="inputPassword4" placeholder="Ex: MAIN" [(ngModel)]="branche.brancheRef" [ngModelOptions]="{standalone:true}">
+    </div>
+  </div>
+  <div >
+   <div>
+    <div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupSelect01">Gitalb Project</label>
+    <select class="form-select" [(ngModel)]="idp" [ngModelOptions]="{standalone:true}">
+      <ng-container *ngFor='let project of listProject' >
+      <option value="{{project.id}}">
+        {{project.name}}
+      </option>
+      </ng-container>
+    </select>
+  </div>
+    </div>
+
+  </div>
+
+  
+  <button type="submit" class="btn btn-primary" (click)="addbranchtoProject(branche,idp)">Ajouter</button>
+</form>
+</div>
+           
+</ng-template>
+</li>
+<li [ngbNavItem]="2"> 
+<a ngbNavLink>Liste</a>
+         <ng-template ngbNavContent>
+ 
+           <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">NOM DE LA BRANCHE</th>
+              <th scope="col">BRANCHE REFERENCE</th>
+              <th scope="col">NOM DU PROJET GITALB</th>
+              <th scope="col">ID DU RPOJET GITLAB</th>
+          
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let b of listBranches'>
+              <td>{{b.brancheNom}}</td>
+              <td>{{b.brancheRef}}</td>
+              <td>{{b.project.name}}</td>
+              <td>{{b.project.gitlabProjectId}}</td>
+            </tr>
+           
+          </tbody>
+    </table>
+</ng-template>
+</li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
+</div>
+</div>
+
